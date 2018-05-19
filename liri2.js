@@ -27,33 +27,28 @@ switch (action) {
 }
 
 function sts() {
-  if(process.argv[3]) {
-    spotify.search({ type:'track', query: process.argv[3] }, function(err, data) {
-      if (err) {
-        return console.log('Error occurred: ' + err);
-      }
-      console.log("\nYAY!! You searched for a song! We love music!!\n");
-      console.log("---------------------------");
-      // Artist(s)
-      console.log("\nThe artist's name is " + data.tracks.items[0].artists[0].name); 
-      // The song's name
-      console.log("\nThe songs's name is " + data.tracks.items[0].name); 
-      // A preview link of the song from Spotify
-      console.log("\nSee the album at " + data.tracks.items[0].album.external_urls.spotify); 
-      // The album that the song is from
-      console.log("\nThe Album's name is " + data.tracks.items[0].album.name); 
-    })
-} else  {
-    spotify
-    .request('https://api.spotify.com/v1/artists/5ksRONqssB7BR161NTtJAm')
-    .then(function(data) {
-      console.log("Opps!! You didnt specify a song");
-      console.log("You might Like " + data.name); 
-    })
-    .catch(function(err) {
-      console.error('Error occurred: ' + err); 
-    });
+  var songQuery = process.argv[3] ? { type:'track', query: process.argv[3] } : { type:'artist', query: "5ksRONqssB7BR161NTtJAm"} 
+  var querry1 = data.tracks.items[0];
+  
+  var songGiven = function() {
+      console.log("\nYAY!! You searched for a song! We love music!!" + 
+                    "\nThe artist's name is " + querry1.artists[0].name +
+                    "\nThe songs's name is " + querry1.name +
+                    "\nSee the album at " + querry1.album.external_urls.spotify +
+                    "\nThe Album's name is " + querry1.album.name); 
+  }
 
+  var songNotGiven = function() { 
+    console.log("Opps!! You didnt specify a song");
+  }
+
+  var displayMessage = process.argv[3] ? songGiven : songNotGiven;
+
+  spotify.search(songQuery), function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+    displayMessage();
   }
 }
 
