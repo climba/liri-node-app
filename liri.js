@@ -29,6 +29,7 @@ switch (action) {
   break;
 }
 
+
 function sts() {
   if(process.argv[3]) {
     spotify.search({ type:'track', query: process.argv[3] }, function(err, data) {
