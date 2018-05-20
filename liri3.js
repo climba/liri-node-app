@@ -24,21 +24,18 @@ switch (action) {
   case "movie-this":
   mt();
   break;
-  case "mt":
-  mt();
-  break;
 }
 
 function sts() {
   var songQuery = process.argv[3] ? { type:'track', query: process.argv[3] } : { type:'artist', query: "5ksRONqssB7BR161NTtJAm"} 
-  var querry1 = data.tracks.items[0];
+  var querryStr = data.tracks.items[0];
   
   var songGiven = function() {
       console.log("\nYAY!! You searched for a song! We love music!!" + 
-                    "\nThe artist's name is " + querry1.artists[0].name +
-                    "\nThe songs's name is " + querry1.name +
-                    "\nSee the album at " + querry1.album.external_urls.spotify +
-                    "\nThe Album's name is " + querry1.album.name); 
+                    "\nThe artist's name is " + querryStr.artists[0].name +
+                    "\nThe songs's name is " + querryStr.name +
+                    "\nSee the album at " + querryStr.album.external_urls.spotify +
+                    "\nThe Album's name is " + querryStr.album.name); 
   }
 
   var songNotGiven = function() { 
