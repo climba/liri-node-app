@@ -50,16 +50,19 @@ function chooseTask(task, toDo) {
 function sts() {
   if(value) {
     spotify.search({ type:'track', query: value }, function(err, data) {
-      if (err) {
-        return console.log('Error occurred: ' + err);
-      }
-      //When a song title is entered return these results for that song
-      var querry1 = data.tracks.items[0];
-      console.log("\nYAY!! You searched for a song! We love music!!" + 
-                  "\nThe artist's name is " + querry1.artists[0].name +
-                  "\nThe songs's name is " + querry1.name +
-                  "\nSee the album at " + querry1.album.external_urls.spotify +
-                  "\nThe Album's name is " + querry1.album.name); 
+        if (err) {
+          return console.log('Error occurred: ' + err);
+        }
+        //When a song title is entered return these results for that song
+        var startQ = data.tracks.items[0];
+        var spotifyResults ="\nYAY!! You searched for a song! We love music!!" + 
+                            "\nThe artist's name is " + startQ.artists[0].name +
+                            "\nThe songs's name is " + startQ.name +
+                            "\nSee the album at " + startQ.album.external_urls.spotify +
+                            "\nThe Album's name is " + startQ.album.name + "\n\n"; 
+        console.log(spotifyResults);  
+        // Write the data to the log file
+        appendToFile(spotifyResults);                   
     })
     // If no song title is entered return results for "The Sign" by Ace of Base, 
     // using spotifys unique identifyer for Ace of Base.
@@ -67,9 +70,14 @@ function sts() {
     spotify
     .request('https://api.spotify.com/v1/artists/5ksRONqssB7BR161NTtJAm/albums')
     .then(function(data) {
-      console.log("Opps!! You didnt specify a song" + 
-                  "\nYou might Like "  + data.items[8].name + " by " + data.items[0].artists[0].name); 
-                  // "\nYou might Like " + JSON.stringify(data)); 
+      // Store the data set in a temp variable
+      var spotDefaultRes = "Opps!! You didnt specify a song" + 
+                  "\nYou might Like "  + data.items[8].name + " by " + data.items[0].artists[0].name; 
+          // console log the resutls
+          console.log(spotDefaultRes); 
+          // write the results to the log file
+          appendToFile(spotDefaultRes);          
+                   
     })
     .catch(function(err) {
       console.error('Error occurred: ' + err); 
@@ -94,37 +102,52 @@ function movies() {
   // Run the request
   request(queryUrlF, function(error, response, body) {
     // If the user has entered a movie name return these results for that object
+    
     var movieGiven = function() {
-      console.log("\nYAY!! You searched for a movie! We love movies!!" +
-        "\n---------------------------" +
-        "\nThe title of the movie is " + JSON.parse(body).Title +
-        "\nThe release year was " + JSON.parse(body).Year +
-        "\nThe IMDB Rating is " + JSON.parse(body).imdbRating +
-        "\nThe Rotten Tomatoes Rating is " + JSON.parse(body).Ratings[1].Value +
-        "\nThis movie was produced in the " + JSON.parse(body).Country +
-        "\nThe language of the movie is " + JSON.parse(body).Language +
-        "\nThe plot of the movie is: " + JSON.parse(body).Plot +
-        "\nThe actors in the movie are " + JSON.parse(body).Actors );
 
-      }
-      // If the user has NOT entered a movie name return a suggestion for another movie
-    var movieNotGiven = function() {
-      console.log("\n---------------------------" +
-        "\nYou didnt search for a movie " +
-        "\nIf you haven't watched 'Mr. Nobody', then you should: <http://www.imdb.com/title/tt0485947/>" +
-        "\nIt's on Netflix!" +
-        "\nnext time type 'movie-this' and the name of a movie!");
+          // Store the data set in a variable
+          var movieResults ="\nYAY!! You searched for a movie! We love movies!!" +
+                            "\n---------------------------" +
+                            "\nThe title of the movie is " + JSON.parse(body).Title +
+                            "\nThe release year was " + JSON.parse(body).Year +
+                            "\nThe IMDB Rating is " + JSON.parse(body).imdbRating +
+                            "\nThe Rotten Tomatoes Rating is " + JSON.parse(body).Ratings[1].Value +
+                            "\nThis movie was produced in the " + JSON.parse(body).Country +
+                            "\nThe language of the movie is " + JSON.parse(body).Language +
+                            "\nThe plot of the movie is: " + JSON.parse(body).Plot +
+                            "\nThe actors in the movie are " + JSON.parse(body).Actors + 
+                            "\n---------------------------" ;
+          console.log(movieResults);
+            
+            // Write the data to the log file
+            appendToFile(movieResults);            
 
-    }
-    // If the request is successful return the movies data specified in its function
-  if (movieName === "") {
-        movieNotGiven();
-    // If no movie requested return the default movies data specified in its function
-  } else if (!error && response.statusCode === 200) {
-    movieGiven() 
+          }
+        // If the user has NOT entered a movie name return a suggestion for another movie
+        var movieNotGiven = function() {
+
+            // Store the data set in a variable
+            var defaultMovResults ="\n---------------------------" +
+                                "\nYou didnt search for a movie " +
+                                "\nIf you haven't watched 'Mr. Nobody', then you should: <http://www.imdb.com/title/tt0485947/>" +
+                                "\nIt's on Netflix!" +
+                                "\nnext time type 'movie-this' and the name of a movie!" + 
+                                "\nYour command should look like this 'movie-this <movie name here>' " +
+                                "\n---------------------------" ;
+            console.log(defaultMovResults);          
+            // Write the data set to the log file
+            appendToFile(defaultMovResults);          
+
+        }
+        // If the request is successful return the movies data specified in its function
+        if (movieName === "") {
+              movieNotGiven();
+          // If no movie requested return the default movies data specified in its function
+        } else if (!error && response.statusCode === 200) {
+          movieGiven() 
+        }
+    });
   }
-});
-}
 
 // Return the last 5 tweets for the Gripster
 function myTweetz() {
@@ -133,9 +156,13 @@ function myTweetz() {
         if (!error) {
           // Loop through the results and return the 5 latest tweets
           for(var i =0; i < 20; i++) {
-            console.log("\n" + tweets[i].text + "\n" + 
-                        "This tweet was created on: " + tweets[i].created_at + "\n" +
-                        "-------------------------");
+            var tweetDump = "-------------------------\nTweet: " + tweets[i].text + "\n" +
+                            "This tweet was created on: " + tweets[i].created_at + "\n" + "\n" +
+                            "-------------------------";
+            // Dislay the tweets in the console
+            console.log(tweetDump);
+            // Append the tweets to the log file
+            appendToFile(tweetDump);            
           }
         }
       });
@@ -156,6 +183,22 @@ function fileSys() {
     chooseTask(dataArr[0], dataArr[1]);
   });
 
+}
+
+// This function will append the data to the log.txt file
+function appendToFile(dataDump) {
+  // Appends the variable 'dataDump' created in each function above to a file called 'log.txt'. 
+  fs.appendFile("log.txt", dataDump, function(error) {
+    // Log errors (if any) 
+    if (error) {
+      console.log(error);
+    }
+    else {
+
+      // Else, logs the confirmation that the data was appended successfully to the file.
+      console.log("Data added to the log file.");
+    }
+  });
 }
 
 
