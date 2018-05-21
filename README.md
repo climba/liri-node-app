@@ -1,12 +1,12 @@
-# LIRI Bot
+# Command Line Node APP
 
 ### Overview
 
-This project is called LIRI. LIRI is a _Language_ Interpretation and Recognition Interface. LIRI works as a command line node app that takes in parameters and returns specific data.
+This project is a command line node app that takes in parameters and returns data from specific APIs depending on what command the user enters into the terminal.
 
 ### Running the App
 
-1. LIRI will display your latest tweets. Details about Spotify songs and details about movies from OMDB 
+1. The App has 4 main functions. It ca display your latest tweets, return details about Spotify songs, return details about movies from OMDB and it also reads a text file that is inside the main project directory, takes data from that file and runs it through the spotify function.
 
 
 2. To run this app, you'll need to install the following Node packages.
@@ -22,9 +22,9 @@ This project is called LIRI. LIRI is a _Language_ Interpretation and Recognition
 
 ### Instructions
 
-1. Once you have installed the above packages you are almost ready to run the app. However, to allow the app to run you also need API keys and secrets from twitter and spotify. These keys will be contained in a file called .env
+1. Once you have installed the above packages you are almost ready to run the app. However, to allow the app to connet to the APIs you also need API keys and secrets from twitter and spotify. These keys will be contained in a file called .env
 
-2. After you have cloned the app from github, to actually run it, you will need to populate your own `.env` file.
+2. After you have cloned the app from github, to run it, you will need to populate your own `.env` file.
 
 3. Create a file named `.env`, add the following to it, replacing the values with your API keys (no quotes) once you have them:
 
@@ -43,8 +43,7 @@ TWITTER_ACCESS_TOKEN_SECRET=your-twitter-access-token-secret
 
 ```
 
-* This file will be used by the `dotenv` package to set what are known as environment variables to the global `process.env` object in node. These are values that are meant to be specific to the computer that node is running on, and since we are gitignoring this file, they won't be pushed to github &mdash; keeping our API key information private.
-
+* This file will be used by the `dotenv` package to set what are known as environment variables to the global `process.env` object in node. These are values that are meant to be specific to the computer that node is running on. You should also add the .env file into your gitignore file. The will allow you to push the project to github without publising your privte API keys onto github.
 
 
 4. Get your Twitter API keys by following these steps:

@@ -132,8 +132,10 @@ function myTweetz() {
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error) {
           // Loop through the results and return the 5 latest tweets
-          for(var i =0; i < 5; i++) {
-            console.log(tweets[i].text);
+          for(var i =0; i < 20; i++) {
+            console.log("\n" + tweets[i].text + "\n" + 
+                        "This tweet was created on: " + tweets[i].created_at + "\n" +
+                        "-------------------------");
           }
         }
       });
