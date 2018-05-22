@@ -6,7 +6,8 @@ This project is a command line node app that takes in parameters and returns dat
 
 ### Running the App
 
-1. The App has 4 main functions. It ca display your latest tweets, return details about Spotify songs, return details about movies from OMDB and it also reads a text file that is inside the main project directory, takes data from that file and runs it through the spotify function.
+1. This App has 4 main functions. It can display your latest tweets, return details about Spotify songs, return details about movies from OMDB and it also reads a text file that is inside the main project directory, takes data from that file and runs it through the spotify function.
+
 
 
 2. To run this app, you'll need to install the following Node packages.
@@ -128,7 +129,7 @@ To run the app with shortcut commands use:
      * If you haven't watched "Mr. Nobody," then you should: <http://www.imdb.com/title/tt0485947/>
      
      * It's on Netflix!
-     
+
 
 4. `node liri.js do-what-it-says` or  `node liri.js dws`
    
