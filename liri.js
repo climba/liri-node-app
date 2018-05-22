@@ -43,6 +43,9 @@ function chooseTask(task, toDo) {
     case "do-what-it-says":
     fileSys();
     break;
+    case "dws":
+    fileSys();
+    break;
   }
 }
 
