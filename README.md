@@ -92,11 +92,11 @@ To run the app with shortcut commands use:
 
 ### What Each Command Does
 
-1. `node liri.js my-tweets`
+1. `node liri.js my-tweets` or `node liri.js myt`
 
    * Once you set a user name in the twitter function This will show the last 20 tweets and when they were created at in your terminal/bash window.
 
-2. `node liri.js spotify-this-song '<song name here>'`
+2. `node liri.js spotify-this-song '<song name here>'` or `node liri.js sts '<song name here>'`
 
    * This will show the following information about the requested song in your terminal/bash window
      
@@ -108,7 +108,7 @@ To run the app with shortcut commands use:
    * If no song is provided then the program will default to "The Sign" by Ace of Base.
    
 
-3. `node liri.js movie-this '<movie name here>'`
+3. `node liri.js movie-this '<movie name here>'` or `node liri.js mt '<movie name here>'`
 
    * This will output the following information to your terminal/bash window:
 
