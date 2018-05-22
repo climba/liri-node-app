@@ -76,6 +76,20 @@ To use this app run one of the following commands:
 
     * `node liri.js do-what-it-says`
 
+To run the app with shortcut commands use:
+
+    * `node liri.js myt`
+
+    * `node liri.js sts`
+
+    * `node liri.js sts <song name here>`
+
+    * `node liri.js mt`
+
+    * `node liri.js mt movie-title`
+
+    * `node liri.js dws`    
+
 ### What Each Command Does
 
 1. `node liri.js my-tweets`
