@@ -131,7 +131,7 @@ To run the app with shortcut commands use:
    
    * You'll use the request package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use `trilogy`.
 
-4. `node liri.js do-what-it-says`
+4. `node liri.js do-what-it-says` or  `node liri.js dws`
    
    * Uses the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
      
